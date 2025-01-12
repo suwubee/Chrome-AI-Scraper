@@ -216,6 +216,8 @@ function transformToShopifyApiData(html) {
 
   // 组装API数据
   const apiData = {
+    shop_name: "your_store_name",
+    access_token: "shpat_111111111",
     product_data: {
       title: title,
       descriptionHtml: description,
