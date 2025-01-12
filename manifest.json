@@ -1,0 +1,47 @@
+{
+    "name": "My Scraper Framework (MV3)",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "A universal Chrome V3 extension that runs custom scripts for data scraping.",
+    "permissions": [
+      "storage",
+      "activeTab",
+      "scripting",
+      "webRequest",
+      "tabs"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup/popup.html"
+    },
+    "options_ui": {
+      "page": "options/options.html",
+      "open_in_tab": true
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["contentScript.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "scripts/*.js",
+          "lib/*.js",
+          "styles/*.css"
+        ],
+        "matches": ["<all_urls>"]
+      }
+    ]
+  }
+  

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>爬虫脚本执行器</title>
+  <script src="../lib/marked.min.js"></script>
+  <style>
+    body {
+      width: 700px;
+      min-height: 600px;
+      padding: 20px;
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+    }
+
+    /* 标题样式 */
+    h3, h4 {
+      margin: 0 0 20px 0;
+      color: #1976d2;
+    }
+
+    h4 { 
+      font-size: 14px; 
+      color: #333;
+    }
+
+    /* 通用容器样式 */
+    .log-container, .result-container, .execution-status {
+      margin: 15px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .log-container {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    /* 表单元素 */
+    .script-selector {
+      margin-bottom: 15px;
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    /* 按钮样式 */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* 结果区域 */
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .result-content {
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 15px;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+
+    /* JSON 格式化样式 */
+    .json-content {
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .json-key { color: #881391; }
+    .json-string { color: #c41a16; }
+    .json-number { color: #1c00cf; }
+    .json-boolean { color: #0000ff; }
+    .json-null { color: #808080; }
+
+    /* 状态项 */
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+      font-size: 13px;
+    }
+
+    /* 底部链接 */
+    .manage-link {
+      display: block;
+      margin-top: 20px;
+      color: #666;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .manage-link:hover {
+      color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <h3>爬虫脚本执行器</h3>
+  
+  <select id="script-selector" class="script-selector">
+    <option value="">选择要执行的脚本...</option>
+  </select>
+
+  <div class="button-group">
+    <button id="btn-execute" disabled>执行选中脚本</button>
+    <button id="btn-new-window">新窗口打开</button>
+  </div>
+  
+  <div id="status"></div>
+
+  <div id="execution-status" class="execution-status">
+    <div class="status-item">
+      <span>状态:</span>
+      <span id="current-status">未开始</span>
+    </div>
+    <div class="status-item">
+      <span>已采集:</span>
+      <span id="captured-count">0</span>
+    </div>
+  </div>
+
+  <div id="log-container" class="log-container">
+    <h4>执行日志:</h4>
+    <div id="logs"></div>
+  </div>
+
+  <div id="result-container" class="result-container">
+    <div class="result-header">
+      <h4>执行结果:</h4>
+      <button id="btn-copy" class="copy-button">
+        <span class="copy-icon">📋</span>
+        <span class="copy-text">复制结果</span>
+      </button>
+    </div>
+    <div id="result-content" class="markdown-body"></div>
+  </div>
+
+  <a href="../options/options.html" target="_blank" class="manage-link">
+    管理脚本 →
+  </a>
+
+  <script src="popup.js"></script>
+</body>
+</html>
