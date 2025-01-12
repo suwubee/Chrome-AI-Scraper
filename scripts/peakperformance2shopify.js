@@ -216,8 +216,6 @@ function transformToShopifyApiData(html) {
 
   // 组装API数据
   const apiData = {
-    shop_name: "magetech-dev",
-    access_token: "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",
     product_data: {
       title: title,
       descriptionHtml: description,
